@@ -1,0 +1,11 @@
+<div class="login">
+  <div class="menu">
+    <a [routerLink]="['/']">首页</a> | 
+    <a [routerLink]="['/reports']">龙虎榜</a>
+  </div>
+  <div>
+    <d-button *ngIf="!isLogin" (click)="authService.loginRedirect()">登录</d-button>
+    <div *ngIf="isLogin" (click)="authService.logoutPopup();">欢迎：{{authService.instance.getActiveAccount()?.username}}
+    </div>
+  </div>
+</div>

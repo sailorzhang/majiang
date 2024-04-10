@@ -1,0 +1,38 @@
+<section>
+    <form dForm [layout]="layoutDirection">
+        <d-form-item>
+            <d-form-label [required]="true" [hasHelp]="true" helpTips="杀鸡盘等">代号</d-form-label>
+            <d-form-control>
+                <input dTextInput name="taskName" [(ngModel)]="formData.taskName" />
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label>开场时间</d-form-label>
+            <d-form-control>
+                <div class="devui-input-group devui-dropdown-origin" dActiveFormControl>
+                    <input class="devui-input devui-form-control" placeholder="y/MM/dd" (click)="datePicker1.toggle()"
+                        name="dp" [(ngModel)]="formData.createDate" autocomplete="off" dDatepicker #datePicker1="datepicker" />
+                    <div *ngIf="formData.createDate" class="devui-input-group-addon close-icon-wrapper"
+                        (click)="datePicker1.clearAll()">
+                        <i class="icon icon-close"></i>
+                    </div>
+                    <div class="devui-input-group-addon" (click)="datePicker1.toggle()">
+                        <i class="icon icon-calendar"></i>
+                    </div>
+                </div>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label [required]="true">详细</d-form-label>
+            <d-form-control *ngFor="let case of formData.cases;let index = index;">
+                <div class="case_container">
+                    <d-select [options]="userList" [name]="'user'+index" size="sm" [filterKey]="'label'"
+                        [(ngModel)]="case.user"></d-select>
+                    <input dTextInput type="number" [name]="'amount'+index" [(ngModel)]="case.amount" />
+                    <d-icon icon="icon-unfold-bar" class="calc" (click)="calc(index)"></d-icon>
+                </div>
+            </d-form-control>
+        </d-form-item>
+
+    </form>
+</section>

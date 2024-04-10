@@ -1,0 +1,21 @@
+.demo-chart {
+    width: 100%;
+}
+
+.list {
+    border: 1px solid #f2f2f3;
+    border-radius: 15px;
+    margin: 0 10px;
+}
+
+.d-table {
+    margin: 5px;
+}
+
+.list-header {
+    padding: 5px 20px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

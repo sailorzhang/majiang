@@ -1,0 +1,58 @@
+<d-toast [value]="msgs"></d-toast>
+<div echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div>
+
+<div class="list">
+  <div class="list-header">
+    <d-pagination
+      [total]="pager.total"
+      [(pageSize)]="pager.pageSize"
+      totalItemText="总场次"
+      [(pageIndex)]="pager.pageIndex"
+      [canViewTotal]="true"
+      [showPageSelector]="false"
+      [canChangePageSize]="true"
+      [lite]="true"
+      (pageIndexChange) = "onIndexChange($event)"
+    >
+    </d-pagination>
+    <!-- <span>总计：{{cases.length}} 场</span> --><d-button *ngIf="isAdmin" (btnClick)="AddTask()" icon="icon-add" bsStyle="primary" bsSize="xs" title="add" shape="circle"></d-button>
+  </div>
+  <d-data-table  class="d-table" [dataSource]="casesShow" [tableWidthConfig]="tableWidthConfig" [scrollable]="true"
+    [tableOverflowType]="'overlay'" [striped]="true">
+    <thead dTableHead>
+      <tr dTableRow>
+        <th dHeadCell>代号</th>
+        <th dHeadCell>日期</th>
+        <th dHeadCell>明细</th>
+      </tr>
+    </thead>
+    <tbody dTableBody>
+      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex" let-nestedLayer="nestedLayer"
+        let-nestedIndex="nestedIndex">
+        <tr dTableRow [ngClass]="{ 'table-row-selected': rowItem.$checked }">
+          <td dTableCell [rowItem]="rowItem" [nestedLayer]="nestedLayer">
+            <ng-container *ngIf="!isAdmin">
+              {{ rowItem['casename'] }}
+            </ng-container>
+            <ng-container *ngIf="isAdmin">
+              <d-button bsStyle="text" (btnClick)="EditTask(rowItem)" bsSize="lg">{{rowItem['casename']}}</d-button>
+            </ng-container>
+          </td>
+          <td dTableCell>
+            <div>{{ rowItem['create_date'] | date:'yyyy-MM-dd' }}</div>
+          </td>
+          <td dTableCell>
+            <div *ngFor="let case of rowItem['cases']">
+              {{case.user.label}}: {{case.amount}}
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </d-data-table>
+  <ng-template #loadingTemplateRef2>
+    <div class="loading-container">
+      <img src="../../assets/imgs/loading.png" class="loading-img" alt="">
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,20 @@
+<div class="card-list">
+    <d-card class="card-container">
+        <d-card-header>
+          <d-card-title>最牛的: {{top?.username}}</d-card-title>
+        </d-card-header>
+        <d-card-content>
+            {{top?.create_date| date: 'y/M/d'}} : <strong>{{top?.amount}}</strong>
+        </d-card-content>
+      </d-card>
+      <d-card class="card-container">
+        <d-card-header>
+          <d-card-title>最熊的: {{bottom?.username}}</d-card-title>
+        </d-card-header>
+        <d-card-content>
+            {{bottom?.create_date | date: 'y/M/d'}}: <strong>{{bottom?.amount}}</strong>
+        </d-card-content>
+      </d-card>
+</div>
+
+<div echarts [options]="options" [merge]="updateOptions" class="byuser-chart"></div>

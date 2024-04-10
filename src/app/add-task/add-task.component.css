@@ -1,0 +1,11 @@
+.devui-dropdown-origin {
+    width: 160px;
+}
+
+.case_container {
+    display: flex;
+}
+
+.calc {
+  cursor: pointer;
+}
